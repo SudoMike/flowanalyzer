@@ -316,7 +316,7 @@ class mac_address(object):
         """
         try:
             return (self.mac_oui[mac_oui_num]["Vendor"],self.mac_oui[mac_oui_num]["Type"])
-        except NameError,KeyError:
+        except (NameError, KeyError):
             return False
 
 ### Generic ICMP Parsers ###

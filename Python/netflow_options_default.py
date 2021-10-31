@@ -18,13 +18,13 @@
 # service netflow_v5 restart
 # service netflow_v9 restart
 # service ipfix restart
-bulk_insert_count = 700
+bulk_insert_count = 10
 
 #### Netflow v5 UDP Port ####
 # This is the port that the Netflow v5 listener runs on.
 # By default the port is set to 2055, the typical Netflow v5 port.
 # After changing this port run 'sudo systemctl restart netflow_v5' from a root-level shell
-netflow_v5_port = 2055
+netflow_v5_port = 9995
 
 #### Netflow v9 UDP Port ####
 # This is the port that the Netflow v9 listener runs on.
@@ -46,7 +46,9 @@ sflow_port = 6343
 
 #### Elasticsearch Host and Port ####
 # The Elasticsearch host and port to send flow data to
-elasticsearch_host = '127.0.0.1'
+from os import path
+creds = open('/etc/elasticsearch_creds').read().strip()
+elasticsearch_host = f'http://{creds}@localhost:9200'
 
 #### DNS Lookups ####
 # The appliance will attempt to do a reverse DNS lookup for IP addresses reported in flows,
@@ -63,7 +65,7 @@ elasticsearch_host = '127.0.0.1'
 # throttled by that DNS resolver, and possibly cut off due to unusually high volumes of requests.
 #
 # Set to False if you don't want to enable DNS lookups, otherwise change to True to enable lookups.
-dns = False
+dns = True
 
 # Internal DNS Lookups
 # This setting determines whether the appliance will attempt to resolve internal RFC 1918 IP addresses

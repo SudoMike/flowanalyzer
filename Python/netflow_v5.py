@@ -241,7 +241,8 @@ if __name__ == "__main__":
 
 			# Increment the record counter
 			record_num += 1
-				
+			logging.debug(f'Record {record_num} (will bulk insert when it is {bulk_insert_count})')
+
 			# Elasticsearch bulk insert
 			if record_num >= bulk_insert_count:
 				
